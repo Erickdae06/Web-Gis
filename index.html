@@ -1,0 +1,1035 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width"
+    />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <link rel="stylesheet" href="css/leaflet.css" />
+    <link rel="stylesheet" href="css/qgis2web.css" />
+    <link rel="stylesheet" href="css/fontawesome-all.min.css" />
+    <style>
+      html,
+      body,
+      #map {
+        width: 100%;
+        height: 100%;
+        padding: 0;
+        margin: 0;
+      }
+      .leaflet-popup-content > table img {
+        width: 300px;
+        height: 300px;
+      }
+    </style>
+    <title></title>
+  </head>
+  <body>
+    <div id="map"></div>
+    <script src="js/qgis2web_expressions.js"></script>
+    <script src="js/leaflet.js"></script>
+    <script src="js/leaflet-svg-shape-markers.min.js"></script>
+    <script src="js/leaflet.rotatedMarker.js"></script>
+    <script src="js/leaflet.pattern.js"></script>
+    <script src="js/leaflet-hash.js"></script>
+    <script src="js/Autolinker.min.js"></script>
+    <script src="js/rbush.min.js"></script>
+    <script src="js/labelgun.min.js"></script>
+    <script src="js/labels.js"></script>
+    <script src="data/ADMINISTRASIDESA_AR_25K_1.js"></script>
+    <script src="data/datahotel_2.js"></script>
+    <script>
+      var map = L.map("map", {
+        zoomControl: true,
+        maxZoom: 28,
+        minZoom: 1,
+      }).fitBounds([
+        [-6.241026305246585, 106.68586932024948],
+        [-6.0958064848294935, 106.99023727719285],
+      ]);
+      var hash = new L.Hash(map);
+      map.attributionControl.setPrefix(
+        '<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>'
+      );
+      var autolinker = new Autolinker({
+        truncate: { length: 30, location: "smart" },
+      });
+      var bounds_group = new L.featureGroup([]);
+      function setBounds() {}
+      map.createPane("pane_GoogleMaps_0");
+      map.getPane("pane_GoogleMaps_0").style.zIndex = 400;
+      var layer_GoogleMaps_0 = L.tileLayer(
+        "https://mt1.google.com/vt/lyrs=m&x={x}&y={y}&z={z}",
+        {
+          pane: "pane_GoogleMaps_0",
+          opacity: 1.0,
+          attribution: "",
+          minZoom: 1,
+          maxZoom: 28,
+          minNativeZoom: 0,
+          maxNativeZoom: 19,
+        }
+      );
+      layer_GoogleMaps_0;
+      map.addLayer(layer_GoogleMaps_0);
+      function pop_ADMINISTRASIDESA_AR_25K_1(feature, layer) {
+        var popupContent =
+          '<table>\
+                    <tr>\
+                        <td colspan="2">' +
+          (feature.properties["NAMOBJ"] !== null
+            ? autolinker.link(feature.properties["NAMOBJ"].toLocaleString())
+            : "") +
+          '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' +
+          (feature.properties["REMARK"] !== null
+            ? autolinker.link(feature.properties["REMARK"].toLocaleString())
+            : "") +
+          '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' +
+          (feature.properties["LUASWH"] !== null
+            ? autolinker.link(feature.properties["LUASWH"].toLocaleString())
+            : "") +
+          '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' +
+          (feature.properties["LCODE"] !== null
+            ? autolinker.link(feature.properties["LCODE"].toLocaleString())
+            : "") +
+          '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' +
+          (feature.properties["WADMKC"] !== null
+            ? autolinker.link(feature.properties["WADMKC"].toLocaleString())
+            : "") +
+          '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' +
+          (feature.properties["WADMKK"] !== null
+            ? autolinker.link(feature.properties["WADMKK"].toLocaleString())
+            : "") +
+          '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' +
+          (feature.properties["WADMPR"] !== null
+            ? autolinker.link(feature.properties["WADMPR"].toLocaleString())
+            : "") +
+          "</td>\
+                    </tr>\
+                </table>";
+        layer.bindPopup(popupContent, { maxHeight: 400 });
+      }
+
+      function style_ADMINISTRASIDESA_AR_25K_1_0(feature) {
+        switch (String(feature.properties["NAMOBJ"])) {
+          case "Bendungan Hilir":
+            return {
+              pane: "pane_ADMINISTRASIDESA_AR_25K_1",
+              opacity: 1,
+              color: "rgba(35,35,35,1.0)",
+              dashArray: "",
+              lineCap: "butt",
+              lineJoin: "miter",
+              weight: 1.0,
+              fill: true,
+              fillOpacity: 1,
+              fillColor: "rgba(215,25,28,1.0)",
+              interactive: true,
+            };
+            break;
+          case "Bungur":
+            return {
+              pane: "pane_ADMINISTRASIDESA_AR_25K_1",
+              opacity: 1,
+              color: "rgba(35,35,35,1.0)",
+              dashArray: "",
+              lineCap: "butt",
+              lineJoin: "miter",
+              weight: 1.0,
+              fill: true,
+              fillOpacity: 1,
+              fillColor: "rgba(218,39,34,1.0)",
+              interactive: true,
+            };
+            break;
+          case "Cempakabaru":
+            return {
+              pane: "pane_ADMINISTRASIDESA_AR_25K_1",
+              opacity: 1,
+              color: "rgba(35,35,35,1.0)",
+              dashArray: "",
+              lineCap: "butt",
+              lineJoin: "miter",
+              weight: 1.0,
+              fill: true,
+              fillOpacity: 1,
+              fillColor: "rgba(222,52,41,1.0)",
+              interactive: true,
+            };
+            break;
+          case "Cempakaputih Barat":
+            return {
+              pane: "pane_ADMINISTRASIDESA_AR_25K_1",
+              opacity: 1,
+              color: "rgba(35,35,35,1.0)",
+              dashArray: "",
+              lineCap: "butt",
+              lineJoin: "miter",
+              weight: 1.0,
+              fill: true,
+              fillOpacity: 1,
+              fillColor: "rgba(225,66,47,1.0)",
+              interactive: true,
+            };
+            break;
+          case "Cempakaputih Timur":
+            return {
+              pane: "pane_ADMINISTRASIDESA_AR_25K_1",
+              opacity: 1,
+              color: "rgba(35,35,35,1.0)",
+              dashArray: "",
+              lineCap: "butt",
+              lineJoin: "miter",
+              weight: 1.0,
+              fill: true,
+              fillOpacity: 1,
+              fillColor: "rgba(229,79,53,1.0)",
+              interactive: true,
+            };
+            break;
+          case "Cideng":
+            return {
+              pane: "pane_ADMINISTRASIDESA_AR_25K_1",
+              opacity: 1,
+              color: "rgba(35,35,35,1.0)",
+              dashArray: "",
+              lineCap: "butt",
+              lineJoin: "miter",
+              weight: 1.0,
+              fill: true,
+              fillOpacity: 1,
+              fillColor: "rgba(232,93,59,1.0)",
+              interactive: true,
+            };
+            break;
+          case "Cikini":
+            return {
+              pane: "pane_ADMINISTRASIDESA_AR_25K_1",
+              opacity: 1,
+              color: "rgba(35,35,35,1.0)",
+              dashArray: "",
+              lineCap: "butt",
+              lineJoin: "miter",
+              weight: 1.0,
+              fill: true,
+              fillOpacity: 1,
+              fillColor: "rgba(236,106,66,1.0)",
+              interactive: true,
+            };
+            break;
+          case "Duripulo":
+            return {
+              pane: "pane_ADMINISTRASIDESA_AR_25K_1",
+              opacity: 1,
+              color: "rgba(35,35,35,1.0)",
+              dashArray: "",
+              lineCap: "butt",
+              lineJoin: "miter",
+              weight: 1.0,
+              fill: true,
+              fillOpacity: 1,
+              fillColor: "rgba(239,120,72,1.0)",
+              interactive: true,
+            };
+            break;
+          case "Galur":
+            return {
+              pane: "pane_ADMINISTRASIDESA_AR_25K_1",
+              opacity: 1,
+              color: "rgba(35,35,35,1.0)",
+              dashArray: "",
+              lineCap: "butt",
+              lineJoin: "miter",
+              weight: 1.0,
+              fill: true,
+              fillOpacity: 1,
+              fillColor: "rgba(243,133,78,1.0)",
+              interactive: true,
+            };
+            break;
+          case "Gambir":
+            return {
+              pane: "pane_ADMINISTRASIDESA_AR_25K_1",
+              opacity: 1,
+              color: "rgba(35,35,35,1.0)",
+              dashArray: "",
+              lineCap: "butt",
+              lineJoin: "miter",
+              weight: 1.0,
+              fill: true,
+              fillOpacity: 1,
+              fillColor: "rgba(246,147,84,1.0)",
+              interactive: true,
+            };
+            break;
+          case "Gelora":
+            return {
+              pane: "pane_ADMINISTRASIDESA_AR_25K_1",
+              opacity: 1,
+              color: "rgba(35,35,35,1.0)",
+              dashArray: "",
+              lineCap: "butt",
+              lineJoin: "miter",
+              weight: 1.0,
+              fill: true,
+              fillOpacity: 1,
+              fillColor: "rgba(250,160,91,1.0)",
+              interactive: true,
+            };
+            break;
+          case "Gondangdia":
+            return {
+              pane: "pane_ADMINISTRASIDESA_AR_25K_1",
+              opacity: 1,
+              color: "rgba(35,35,35,1.0)",
+              dashArray: "",
+              lineCap: "butt",
+              lineJoin: "miter",
+              weight: 1.0,
+              fill: true,
+              fillOpacity: 1,
+              fillColor: "rgba(253,174,97,1.0)",
+              interactive: true,
+            };
+            break;
+          case "Gunungsahari Selatan":
+            return {
+              pane: "pane_ADMINISTRASIDESA_AR_25K_1",
+              opacity: 1,
+              color: "rgba(35,35,35,1.0)",
+              dashArray: "",
+              lineCap: "butt",
+              lineJoin: "miter",
+              weight: 1.0,
+              fill: true,
+              fillOpacity: 1,
+              fillColor: "rgba(253,181,106,1.0)",
+              interactive: true,
+            };
+            break;
+          case "Gunungsahari Utara":
+            return {
+              pane: "pane_ADMINISTRASIDESA_AR_25K_1",
+              opacity: 1,
+              color: "rgba(35,35,35,1.0)",
+              dashArray: "",
+              lineCap: "butt",
+              lineJoin: "miter",
+              weight: 1.0,
+              fill: true,
+              fillOpacity: 1,
+              fillColor: "rgba(253,189,114,1.0)",
+              interactive: true,
+            };
+            break;
+          case "Harapanmulia":
+            return {
+              pane: "pane_ADMINISTRASIDESA_AR_25K_1",
+              opacity: 1,
+              color: "rgba(35,35,35,1.0)",
+              dashArray: "",
+              lineCap: "butt",
+              lineJoin: "miter",
+              weight: 1.0,
+              fill: true,
+              fillOpacity: 1,
+              fillColor: "rgba(254,196,123,1.0)",
+              interactive: true,
+            };
+            break;
+          case "Joharbaru":
+            return {
+              pane: "pane_ADMINISTRASIDESA_AR_25K_1",
+              opacity: 1,
+              color: "rgba(35,35,35,1.0)",
+              dashArray: "",
+              lineCap: "butt",
+              lineJoin: "miter",
+              weight: 1.0,
+              fill: true,
+              fillOpacity: 1,
+              fillColor: "rgba(254,203,131,1.0)",
+              interactive: true,
+            };
+            break;
+          case "Kampungbali":
+            return {
+              pane: "pane_ADMINISTRASIDESA_AR_25K_1",
+              opacity: 1,
+              color: "rgba(35,35,35,1.0)",
+              dashArray: "",
+              lineCap: "butt",
+              lineJoin: "miter",
+              weight: 1.0,
+              fill: true,
+              fillOpacity: 1,
+              fillColor: "rgba(254,211,140,1.0)",
+              interactive: true,
+            };
+            break;
+          case "Kampungrawa":
+            return {
+              pane: "pane_ADMINISTRASIDESA_AR_25K_1",
+              opacity: 1,
+              color: "rgba(35,35,35,1.0)",
+              dashArray: "",
+              lineCap: "butt",
+              lineJoin: "miter",
+              weight: 1.0,
+              fill: true,
+              fillOpacity: 1,
+              fillColor: "rgba(254,218,148,1.0)",
+              interactive: true,
+            };
+            break;
+          case "Karanganyar":
+            return {
+              pane: "pane_ADMINISTRASIDESA_AR_25K_1",
+              opacity: 1,
+              color: "rgba(35,35,35,1.0)",
+              dashArray: "",
+              lineCap: "butt",
+              lineJoin: "miter",
+              weight: 1.0,
+              fill: true,
+              fillOpacity: 1,
+              fillColor: "rgba(254,226,157,1.0)",
+              interactive: true,
+            };
+            break;
+          case "Karettengsin":
+            return {
+              pane: "pane_ADMINISTRASIDESA_AR_25K_1",
+              opacity: 1,
+              color: "rgba(35,35,35,1.0)",
+              dashArray: "",
+              lineCap: "butt",
+              lineJoin: "miter",
+              weight: 1.0,
+              fill: true,
+              fillOpacity: 1,
+              fillColor: "rgba(254,233,165,1.0)",
+              interactive: true,
+            };
+            break;
+          case "Kartini":
+            return {
+              pane: "pane_ADMINISTRASIDESA_AR_25K_1",
+              opacity: 1,
+              color: "rgba(35,35,35,1.0)",
+              dashArray: "",
+              lineCap: "butt",
+              lineJoin: "miter",
+              weight: 1.0,
+              fill: true,
+              fillOpacity: 1,
+              fillColor: "rgba(255,240,174,1.0)",
+              interactive: true,
+            };
+            break;
+          case "Kebonkacang":
+            return {
+              pane: "pane_ADMINISTRASIDESA_AR_25K_1",
+              opacity: 1,
+              color: "rgba(35,35,35,1.0)",
+              dashArray: "",
+              lineCap: "butt",
+              lineJoin: "miter",
+              weight: 1.0,
+              fill: true,
+              fillOpacity: 1,
+              fillColor: "rgba(255,248,182,1.0)",
+              interactive: true,
+            };
+            break;
+          case "Kebonkelapa":
+            return {
+              pane: "pane_ADMINISTRASIDESA_AR_25K_1",
+              opacity: 1,
+              color: "rgba(35,35,35,1.0)",
+              dashArray: "",
+              lineCap: "butt",
+              lineJoin: "miter",
+              weight: 1.0,
+              fill: true,
+              fillOpacity: 1,
+              fillColor: "rgba(255,255,191,1.0)",
+              interactive: true,
+            };
+            break;
+          case "Kebonkosong":
+            return {
+              pane: "pane_ADMINISTRASIDESA_AR_25K_1",
+              opacity: 1,
+              color: "rgba(35,35,35,1.0)",
+              dashArray: "",
+              lineCap: "butt",
+              lineJoin: "miter",
+              weight: 1.0,
+              fill: true,
+              fillOpacity: 1,
+              fillColor: "rgba(247,252,189,1.0)",
+              interactive: true,
+            };
+            break;
+          case "Kebonmelati":
+            return {
+              pane: "pane_ADMINISTRASIDESA_AR_25K_1",
+              opacity: 1,
+              color: "rgba(35,35,35,1.0)",
+              dashArray: "",
+              lineCap: "butt",
+              lineJoin: "miter",
+              weight: 1.0,
+              fill: true,
+              fillOpacity: 1,
+              fillColor: "rgba(240,249,186,1.0)",
+              interactive: true,
+            };
+            break;
+          case "Kebonsirih":
+            return {
+              pane: "pane_ADMINISTRASIDESA_AR_25K_1",
+              opacity: 1,
+              color: "rgba(35,35,35,1.0)",
+              dashArray: "",
+              lineCap: "butt",
+              lineJoin: "miter",
+              weight: 1.0,
+              fill: true,
+              fillOpacity: 1,
+              fillColor: "rgba(232,246,184,1.0)",
+              interactive: true,
+            };
+            break;
+          case "Kemayoran":
+            return {
+              pane: "pane_ADMINISTRASIDESA_AR_25K_1",
+              opacity: 1,
+              color: "rgba(35,35,35,1.0)",
+              dashArray: "",
+              lineCap: "butt",
+              lineJoin: "miter",
+              weight: 1.0,
+              fill: true,
+              fillOpacity: 1,
+              fillColor: "rgba(224,243,181,1.0)",
+              interactive: true,
+            };
+            break;
+          case "Kenari":
+            return {
+              pane: "pane_ADMINISTRASIDESA_AR_25K_1",
+              opacity: 1,
+              color: "rgba(35,35,35,1.0)",
+              dashArray: "",
+              lineCap: "butt",
+              lineJoin: "miter",
+              weight: 1.0,
+              fill: true,
+              fillOpacity: 1,
+              fillColor: "rgba(217,240,179,1.0)",
+              interactive: true,
+            };
+            break;
+          case "Kramat":
+            return {
+              pane: "pane_ADMINISTRASIDESA_AR_25K_1",
+              opacity: 1,
+              color: "rgba(35,35,35,1.0)",
+              dashArray: "",
+              lineCap: "butt",
+              lineJoin: "miter",
+              weight: 1.0,
+              fill: true,
+              fillOpacity: 1,
+              fillColor: "rgba(209,236,176,1.0)",
+              interactive: true,
+            };
+            break;
+          case "Kwitang":
+            return {
+              pane: "pane_ADMINISTRASIDESA_AR_25K_1",
+              opacity: 1,
+              color: "rgba(35,35,35,1.0)",
+              dashArray: "",
+              lineCap: "butt",
+              lineJoin: "miter",
+              weight: 1.0,
+              fill: true,
+              fillOpacity: 1,
+              fillColor: "rgba(202,233,174,1.0)",
+              interactive: true,
+            };
+            break;
+          case "Manggadua Selatan":
+            return {
+              pane: "pane_ADMINISTRASIDESA_AR_25K_1",
+              opacity: 1,
+              color: "rgba(35,35,35,1.0)",
+              dashArray: "",
+              lineCap: "butt",
+              lineJoin: "miter",
+              weight: 1.0,
+              fill: true,
+              fillOpacity: 1,
+              fillColor: "rgba(194,230,171,1.0)",
+              interactive: true,
+            };
+            break;
+          case "Menteng":
+            return {
+              pane: "pane_ADMINISTRASIDESA_AR_25K_1",
+              opacity: 1,
+              color: "rgba(35,35,35,1.0)",
+              dashArray: "",
+              lineCap: "butt",
+              lineJoin: "miter",
+              weight: 1.0,
+              fill: true,
+              fillOpacity: 1,
+              fillColor: "rgba(186,227,169,1.0)",
+              interactive: true,
+            };
+            break;
+          case "Pasarbaru":
+            return {
+              pane: "pane_ADMINISTRASIDESA_AR_25K_1",
+              opacity: 1,
+              color: "rgba(35,35,35,1.0)",
+              dashArray: "",
+              lineCap: "butt",
+              lineJoin: "miter",
+              weight: 1.0,
+              fill: true,
+              fillOpacity: 1,
+              fillColor: "rgba(179,224,166,1.0)",
+              interactive: true,
+            };
+            break;
+          case "Paseban":
+            return {
+              pane: "pane_ADMINISTRASIDESA_AR_25K_1",
+              opacity: 1,
+              color: "rgba(35,35,35,1.0)",
+              dashArray: "",
+              lineCap: "butt",
+              lineJoin: "miter",
+              weight: 1.0,
+              fill: true,
+              fillOpacity: 1,
+              fillColor: "rgba(171,221,164,1.0)",
+              interactive: true,
+            };
+            break;
+          case "Pegangsaan":
+            return {
+              pane: "pane_ADMINISTRASIDESA_AR_25K_1",
+              opacity: 1,
+              color: "rgba(35,35,35,1.0)",
+              dashArray: "",
+              lineCap: "butt",
+              lineJoin: "miter",
+              weight: 1.0,
+              fill: true,
+              fillOpacity: 1,
+              fillColor: "rgba(159,213,166,1.0)",
+              interactive: true,
+            };
+            break;
+          case "Petamburan":
+            return {
+              pane: "pane_ADMINISTRASIDESA_AR_25K_1",
+              opacity: 1,
+              color: "rgba(35,35,35,1.0)",
+              dashArray: "",
+              lineCap: "butt",
+              lineJoin: "miter",
+              weight: 1.0,
+              fill: true,
+              fillOpacity: 1,
+              fillColor: "rgba(148,205,168,1.0)",
+              interactive: true,
+            };
+            break;
+          case "Petojo Selatan":
+            return {
+              pane: "pane_ADMINISTRASIDESA_AR_25K_1",
+              opacity: 1,
+              color: "rgba(35,35,35,1.0)",
+              dashArray: "",
+              lineCap: "butt",
+              lineJoin: "miter",
+              weight: 1.0,
+              fill: true,
+              fillOpacity: 1,
+              fillColor: "rgba(136,196,170,1.0)",
+              interactive: true,
+            };
+            break;
+          case "Petojo Utara":
+            return {
+              pane: "pane_ADMINISTRASIDESA_AR_25K_1",
+              opacity: 1,
+              color: "rgba(35,35,35,1.0)",
+              dashArray: "",
+              lineCap: "butt",
+              lineJoin: "miter",
+              weight: 1.0,
+              fill: true,
+              fillOpacity: 1,
+              fillColor: "rgba(124,188,172,1.0)",
+              interactive: true,
+            };
+            break;
+          case "Rawasari":
+            return {
+              pane: "pane_ADMINISTRASIDESA_AR_25K_1",
+              opacity: 1,
+              color: "rgba(35,35,35,1.0)",
+              dashArray: "",
+              lineCap: "butt",
+              lineJoin: "miter",
+              weight: 1.0,
+              fill: true,
+              fillOpacity: 1,
+              fillColor: "rgba(113,180,174,1.0)",
+              interactive: true,
+            };
+            break;
+          case "Senen":
+            return {
+              pane: "pane_ADMINISTRASIDESA_AR_25K_1",
+              opacity: 1,
+              color: "rgba(35,35,35,1.0)",
+              dashArray: "",
+              lineCap: "butt",
+              lineJoin: "miter",
+              weight: 1.0,
+              fill: true,
+              fillOpacity: 1,
+              fillColor: "rgba(101,172,176,1.0)",
+              interactive: true,
+            };
+            break;
+          case "Serdang":
+            return {
+              pane: "pane_ADMINISTRASIDESA_AR_25K_1",
+              opacity: 1,
+              color: "rgba(35,35,35,1.0)",
+              dashArray: "",
+              lineCap: "butt",
+              lineJoin: "miter",
+              weight: 1.0,
+              fill: true,
+              fillOpacity: 1,
+              fillColor: "rgba(90,164,178,1.0)",
+              interactive: true,
+            };
+            break;
+          case "Sumurbatu":
+            return {
+              pane: "pane_ADMINISTRASIDESA_AR_25K_1",
+              opacity: 1,
+              color: "rgba(35,35,35,1.0)",
+              dashArray: "",
+              lineCap: "butt",
+              lineJoin: "miter",
+              weight: 1.0,
+              fill: true,
+              fillOpacity: 1,
+              fillColor: "rgba(78,156,180,1.0)",
+              interactive: true,
+            };
+            break;
+          case "Tanahtinggi":
+            return {
+              pane: "pane_ADMINISTRASIDESA_AR_25K_1",
+              opacity: 1,
+              color: "rgba(35,35,35,1.0)",
+              dashArray: "",
+              lineCap: "butt",
+              lineJoin: "miter",
+              weight: 1.0,
+              fill: true,
+              fillOpacity: 1,
+              fillColor: "rgba(66,147,182,1.0)",
+              interactive: true,
+            };
+            break;
+          case "Utanpanjang":
+            return {
+              pane: "pane_ADMINISTRASIDESA_AR_25K_1",
+              opacity: 1,
+              color: "rgba(35,35,35,1.0)",
+              dashArray: "",
+              lineCap: "butt",
+              lineJoin: "miter",
+              weight: 1.0,
+              fill: true,
+              fillOpacity: 1,
+              fillColor: "rgba(55,139,184,1.0)",
+              interactive: true,
+            };
+            break;
+          default:
+            return {
+              pane: "pane_ADMINISTRASIDESA_AR_25K_1",
+              opacity: 1,
+              color: "rgba(35,35,35,1.0)",
+              dashArray: "",
+              lineCap: "butt",
+              lineJoin: "miter",
+              weight: 1.0,
+              fill: true,
+              fillOpacity: 1,
+              fillColor: "rgba(43,131,186,1.0)",
+              interactive: true,
+            };
+            break;
+        }
+      }
+      map.createPane("pane_ADMINISTRASIDESA_AR_25K_1");
+      map.getPane("pane_ADMINISTRASIDESA_AR_25K_1").style.zIndex = 401;
+      map.getPane("pane_ADMINISTRASIDESA_AR_25K_1").style["mix-blend-mode"] =
+        "normal";
+      var layer_ADMINISTRASIDESA_AR_25K_1 = new L.geoJson(
+        json_ADMINISTRASIDESA_AR_25K_1,
+        {
+          attribution: "",
+          interactive: true,
+          dataVar: "json_ADMINISTRASIDESA_AR_25K_1",
+          layerName: "layer_ADMINISTRASIDESA_AR_25K_1",
+          pane: "pane_ADMINISTRASIDESA_AR_25K_1",
+          onEachFeature: pop_ADMINISTRASIDESA_AR_25K_1,
+          style: style_ADMINISTRASIDESA_AR_25K_1_0,
+        }
+      );
+      bounds_group.addLayer(layer_ADMINISTRASIDESA_AR_25K_1);
+      map.addLayer(layer_ADMINISTRASIDESA_AR_25K_1);
+      function pop_datahotel_2(feature, layer) {
+        var popupContent =
+          '<table>\
+                    <tr>\
+                        <th scope="row">Nama</th>\
+                        <td>' +
+          (feature.properties["Nama"] !== null
+            ? autolinker.link(feature.properties["Nama"].toLocaleString())
+            : "") +
+          '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Harga</th>\
+                        <td>' +
+          (feature.properties["Harga"] !== null
+            ? autolinker.link(feature.properties["Harga"].toLocaleString())
+            : "") +
+          '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Alamat</th>\
+                        <td>' +
+          (feature.properties["Alamat"] !== null
+            ? autolinker.link(feature.properties["Alamat"].toLocaleString())
+            : "") +
+          '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Kontak</th>\
+                        <td>' +
+          (feature.properties["Kontak"] !== null
+            ? autolinker.link(feature.properties["Kontak"].toLocaleString())
+            : "") +
+          '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Website</th>\
+                        <td>' +
+          (feature.properties["Website"] !== null
+            ? autolinker.link(feature.properties["Website"].toLocaleString())
+            : "") +
+          '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Waktu Chec</th>\
+                        <td>' +
+          (feature.properties["Waktu Chec"] !== null
+            ? autolinker.link(feature.properties["Waktu Chec"].toLocaleString())
+            : "") +
+          '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Waktu Ch_1</th>\
+                        <td>' +
+          (feature.properties["Waktu Ch_1"] !== null
+            ? autolinker.link(feature.properties["Waktu Ch_1"].toLocaleString())
+            : "") +
+          '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Rating</th>\
+                        <td>' +
+          (feature.properties["Rating"] !== null
+            ? autolinker.link(feature.properties["Rating"].toLocaleString())
+            : "") +
+          '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Y</th>\
+                        <td>' +
+          (feature.properties["Y"] !== null
+            ? autolinker.link(feature.properties["Y"].toLocaleString())
+            : "") +
+          '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">X</th>\
+                        <td>' +
+          (feature.properties["X"] !== null
+            ? autolinker.link(feature.properties["X"].toLocaleString())
+            : "") +
+          '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Foto</th>\
+                        <td>' +
+          (feature.properties["foto"] !== null
+            ? '<img src="images/' +
+              String(feature.properties["foto"])
+                .replace(/[\\\/:]/g, "_")
+                .trim() +
+              '"width="350" height="250">'
+            : "") +
+          "</td>\
+                    </tr>\
+                </table>";
+        layer.bindPopup(popupContent, { maxHeight: 400 });
+      }
+
+      function style_datahotel_2_0() {
+        return {
+          pane: "pane_datahotel_2",
+          shape: "diamond",
+          radius: 8.8,
+          opacity: 1,
+          color: "rgba(128,17,25,1.0)",
+          dashArray: "",
+          lineCap: "butt",
+          lineJoin: "miter",
+          weight: 2.0,
+          fill: true,
+          fillOpacity: 1,
+          fillColor: "rgba(219,30,42,1.0)",
+          interactive: true,
+        };
+      }
+      map.createPane("pane_datahotel_2");
+      map.getPane("pane_datahotel_2").style.zIndex = 402;
+      map.getPane("pane_datahotel_2").style["mix-blend-mode"] = "normal";
+      var layer_datahotel_2 = new L.geoJson(json_datahotel_2, {
+        attribution: "",
+        interactive: true,
+        dataVar: "json_datahotel_2",
+        layerName: "layer_datahotel_2",
+        pane: "pane_datahotel_2",
+        onEachFeature: pop_datahotel_2,
+        pointToLayer: function (feature, latlng) {
+          var context = {
+            feature: feature,
+            variables: {},
+          };
+          return L.shapeMarker(latlng, style_datahotel_2_0(feature));
+        },
+      });
+      bounds_group.addLayer(layer_datahotel_2);
+      map.addLayer(layer_datahotel_2);
+      var baseMaps = { "Google Maps": layer_GoogleMaps_0 };
+      L.control
+        .layers(baseMaps, {
+          '<img src="legend/datahotel_2.png" /> data hotel': layer_datahotel_2,
+          'ADMINISTRASIDESA_AR_25K<br /><table><tr><td style="text-align: center;"><img src="legend/ADMINISTRASIDESA_AR_25K_1_BendunganHilir0.png" /></td><td>Bendungan Hilir</td></tr><tr><td style="text-align: center;"><img src="legend/ADMINISTRASIDESA_AR_25K_1_Bungur1.png" /></td><td>Bungur</td></tr><tr><td style="text-align: center;"><img src="legend/ADMINISTRASIDESA_AR_25K_1_Cempakabaru2.png" /></td><td>Cempakabaru</td></tr><tr><td style="text-align: center;"><img src="legend/ADMINISTRASIDESA_AR_25K_1_CempakaputihBarat3.png" /></td><td>Cempakaputih Barat</td></tr><tr><td style="text-align: center;"><img src="legend/ADMINISTRASIDESA_AR_25K_1_CempakaputihTimur4.png" /></td><td>Cempakaputih Timur</td></tr><tr><td style="text-align: center;"><img src="legend/ADMINISTRASIDESA_AR_25K_1_Cideng5.png" /></td><td>Cideng</td></tr><tr><td style="text-align: center;"><img src="legend/ADMINISTRASIDESA_AR_25K_1_Cikini6.png" /></td><td>Cikini</td></tr><tr><td style="text-align: center;"><img src="legend/ADMINISTRASIDESA_AR_25K_1_Duripulo7.png" /></td><td>Duripulo</td></tr><tr><td style="text-align: center;"><img src="legend/ADMINISTRASIDESA_AR_25K_1_Galur8.png" /></td><td>Galur</td></tr><tr><td style="text-align: center;"><img src="legend/ADMINISTRASIDESA_AR_25K_1_Gambir9.png" /></td><td>Gambir</td></tr><tr><td style="text-align: center;"><img src="legend/ADMINISTRASIDESA_AR_25K_1_Gelora10.png" /></td><td>Gelora</td></tr><tr><td style="text-align: center;"><img src="legend/ADMINISTRASIDESA_AR_25K_1_Gondangdia11.png" /></td><td>Gondangdia</td></tr><tr><td style="text-align: center;"><img src="legend/ADMINISTRASIDESA_AR_25K_1_GunungsahariSelatan12.png" /></td><td>Gunungsahari Selatan</td></tr><tr><td style="text-align: center;"><img src="legend/ADMINISTRASIDESA_AR_25K_1_GunungsahariUtara13.png" /></td><td>Gunungsahari Utara</td></tr><tr><td style="text-align: center;"><img src="legend/ADMINISTRASIDESA_AR_25K_1_Harapanmulia14.png" /></td><td>Harapanmulia</td></tr><tr><td style="text-align: center;"><img src="legend/ADMINISTRASIDESA_AR_25K_1_Joharbaru15.png" /></td><td>Joharbaru</td></tr><tr><td style="text-align: center;"><img src="legend/ADMINISTRASIDESA_AR_25K_1_Kampungbali16.png" /></td><td>Kampungbali</td></tr><tr><td style="text-align: center;"><img src="legend/ADMINISTRASIDESA_AR_25K_1_Kampungrawa17.png" /></td><td>Kampungrawa</td></tr><tr><td style="text-align: center;"><img src="legend/ADMINISTRASIDESA_AR_25K_1_Karanganyar18.png" /></td><td>Karanganyar</td></tr><tr><td style="text-align: center;"><img src="legend/ADMINISTRASIDESA_AR_25K_1_Karettengsin19.png" /></td><td>Karettengsin</td></tr><tr><td style="text-align: center;"><img src="legend/ADMINISTRASIDESA_AR_25K_1_Kartini20.png" /></td><td>Kartini</td></tr><tr><td style="text-align: center;"><img src="legend/ADMINISTRASIDESA_AR_25K_1_Kebonkacang21.png" /></td><td>Kebonkacang</td></tr><tr><td style="text-align: center;"><img src="legend/ADMINISTRASIDESA_AR_25K_1_Kebonkelapa22.png" /></td><td>Kebonkelapa</td></tr><tr><td style="text-align: center;"><img src="legend/ADMINISTRASIDESA_AR_25K_1_Kebonkosong23.png" /></td><td>Kebonkosong</td></tr><tr><td style="text-align: center;"><img src="legend/ADMINISTRASIDESA_AR_25K_1_Kebonmelati24.png" /></td><td>Kebonmelati</td></tr><tr><td style="text-align: center;"><img src="legend/ADMINISTRASIDESA_AR_25K_1_Kebonsirih25.png" /></td><td>Kebonsirih</td></tr><tr><td style="text-align: center;"><img src="legend/ADMINISTRASIDESA_AR_25K_1_Kemayoran26.png" /></td><td>Kemayoran</td></tr><tr><td style="text-align: center;"><img src="legend/ADMINISTRASIDESA_AR_25K_1_Kenari27.png" /></td><td>Kenari</td></tr><tr><td style="text-align: center;"><img src="legend/ADMINISTRASIDESA_AR_25K_1_Kramat28.png" /></td><td>Kramat</td></tr><tr><td style="text-align: center;"><img src="legend/ADMINISTRASIDESA_AR_25K_1_Kwitang29.png" /></td><td>Kwitang</td></tr><tr><td style="text-align: center;"><img src="legend/ADMINISTRASIDESA_AR_25K_1_ManggaduaSelatan30.png" /></td><td>Manggadua Selatan</td></tr><tr><td style="text-align: center;"><img src="legend/ADMINISTRASIDESA_AR_25K_1_Menteng31.png" /></td><td>Menteng</td></tr><tr><td style="text-align: center;"><img src="legend/ADMINISTRASIDESA_AR_25K_1_Pasarbaru32.png" /></td><td>Pasarbaru</td></tr><tr><td style="text-align: center;"><img src="legend/ADMINISTRASIDESA_AR_25K_1_Paseban33.png" /></td><td>Paseban</td></tr><tr><td style="text-align: center;"><img src="legend/ADMINISTRASIDESA_AR_25K_1_Pegangsaan34.png" /></td><td>Pegangsaan</td></tr><tr><td style="text-align: center;"><img src="legend/ADMINISTRASIDESA_AR_25K_1_Petamburan35.png" /></td><td>Petamburan</td></tr><tr><td style="text-align: center;"><img src="legend/ADMINISTRASIDESA_AR_25K_1_PetojoSelatan36.png" /></td><td>Petojo Selatan</td></tr><tr><td style="text-align: center;"><img src="legend/ADMINISTRASIDESA_AR_25K_1_PetojoUtara37.png" /></td><td>Petojo Utara</td></tr><tr><td style="text-align: center;"><img src="legend/ADMINISTRASIDESA_AR_25K_1_Rawasari38.png" /></td><td>Rawasari</td></tr><tr><td style="text-align: center;"><img src="legend/ADMINISTRASIDESA_AR_25K_1_Senen39.png" /></td><td>Senen</td></tr><tr><td style="text-align: center;"><img src="legend/ADMINISTRASIDESA_AR_25K_1_Serdang40.png" /></td><td>Serdang</td></tr><tr><td style="text-align: center;"><img src="legend/ADMINISTRASIDESA_AR_25K_1_Sumurbatu41.png" /></td><td>Sumurbatu</td></tr><tr><td style="text-align: center;"><img src="legend/ADMINISTRASIDESA_AR_25K_1_Tanahtinggi42.png" /></td><td>Tanahtinggi</td></tr><tr><td style="text-align: center;"><img src="legend/ADMINISTRASIDESA_AR_25K_1_Utanpanjang43.png" /></td><td>Utanpanjang</td></tr><tr><td style="text-align: center;"><img src="legend/ADMINISTRASIDESA_AR_25K_1_44.png" /></td><td></td></tr></table>':
+            layer_ADMINISTRASIDESA_AR_25K_1,
+        })
+        .addTo(map);
+      setBounds();
+      var i = 0;
+      layer_ADMINISTRASIDESA_AR_25K_1.eachLayer(function (layer) {
+        var context = {
+          feature: layer.feature,
+          variables: {},
+        };
+        layer.bindTooltip(
+          layer.feature.properties["NAMOBJ"] !== null
+            ? String(
+                "<div style=\"color: #000000; font-size: 10pt; font-weight: bold; font-family: 'League Spartan', sans-serif;\">" +
+                  layer.feature.properties["NAMOBJ"]
+              ) + "</div>"
+            : "",
+          {
+            permanent: true,
+            offset: [-0, -16],
+            className: "css_ADMINISTRASIDESA_AR_25K_1",
+          }
+        );
+        labels.push(layer);
+        totalMarkers += 1;
+        layer.added = true;
+        addLabel(layer, i);
+        i++;
+      });
+      var i = 0;
+      layer_datahotel_2.eachLayer(function (layer) {
+        var context = {
+          feature: layer.feature,
+          variables: {},
+        };
+        layer.bindTooltip(
+          layer.feature.properties["Nama"] !== null
+            ? String(
+                "<div style=\"color: #323232; font-size: 10pt; font-family: 'Source Sans Pro', sans-serif;\">" +
+                  layer.feature.properties["Nama"]
+              ) + "</div>"
+            : "",
+          { permanent: true, offset: [-0, -16], className: "css_datahotel_2" }
+        );
+        labels.push(layer);
+        totalMarkers += 1;
+        layer.added = true;
+        addLabel(layer, i);
+        i++;
+      });
+      resetLabels([layer_ADMINISTRASIDESA_AR_25K_1, layer_datahotel_2]);
+      map.on("zoomend", function () {
+        resetLabels([layer_ADMINISTRASIDESA_AR_25K_1, layer_datahotel_2]);
+      });
+      map.on("layeradd", function () {
+        resetLabels([layer_ADMINISTRASIDESA_AR_25K_1, layer_datahotel_2]);
+      });
+      map.on("layerremove", function () {
+        resetLabels([layer_ADMINISTRASIDESA_AR_25K_1, layer_datahotel_2]);
+      });
+    </script>
+  </body>
+</html>
